@@ -1,0 +1,10 @@
+use git
+add
+
+puis
+
+commit
+
+puis push
+
+//pull récupéré les modif.
