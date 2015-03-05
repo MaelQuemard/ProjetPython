@@ -30,6 +30,13 @@ class Activite:
 	def set_comInsee(self, comInsee):
 		self.comInsee = comInsee
 
+	def SQLcreate(self):
+		return "CREATE TABLE IF NOT EXISTS activite (equipementId INTEGER, comInsee INTEGER, actCode INTEGER)"
+	
+	def SQLinsert(self):
+		return "INSERT INTO activite VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.actCode)
+
+
 def parse_json_activite(file):
 	activite = []
 
@@ -37,11 +44,13 @@ def parse_json_activite(file):
 	data = json.loads(json_data)
 
 	for it in data["data"]:
-		activite.append(Activite(it["EquipementId"], it["ComInsee"], it["ActCode"]))
+		if (it["EquipementId"] != None and it["ComInsee"] != None and it["ActCode"] != None):
+			activite.append(Activite(it["EquipementId"], it["ComInsee"], it["ActCode"]))
 
 	return activite
-
+'''
 items = parse_json_activite("../ressource/activite.json")
 
 for item in items:
 	print(item)
+'''

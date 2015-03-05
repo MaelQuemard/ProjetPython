@@ -4,12 +4,25 @@
 import sqlite3
 
 class Database:
-	def __init__(self, pathdb, name):
-		self.conn = sqlite3.connect(path)
+	def __init__(self, pathdb):
+		self.conn = sqlite3.connect(pathdb)
 		self.pathdb = pathdb
-		self.name = name
 
-	def create(self, it):
+	def create(self, name, item):
 		co = self.conn.cursor()
-		co.execute("DROP TABLE IF EXISTS "+self.name)
-		co.execute(it.SQLcreate())
+		co.execute("DROP TABLE IF EXISTS "+name)
+		co.execute(item.SQLcreate())
+		self.conn.commit()
+
+	def insert(self, it):
+		co = self.conn.cursor()
+		for its in it:
+			co.execute(its.SQLinsert())
+
+	def selectAll(self, name):
+		co = self.conn.cursor()
+		for row in co.execute("SELECT * FROM " + name):
+			print(row)
+
+	def close(self):
+		self.conn.close()
