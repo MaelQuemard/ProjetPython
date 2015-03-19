@@ -31,7 +31,7 @@ class Equipement:
 		self.equipementId = equipementId
 
 	def SQLcreate(self):
-		return "CREATE TABLE IF NOT EXISTS equipement (equipementId INTEGER, comInsee INTEGER, insNumeroInstall INTEGER)"
+		return "CREATE TABLE equipement (equipementId integer, comInsee integer, insNumeroInstall integer)"
 	
 	def SQLinsert(self):
 		return "INSERT INTO equipement VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.insNumeroInstall)
@@ -48,7 +48,7 @@ def parse_json_equipement(file):
 
 	return equip
 
-items = parse_json_equipement("c:/Users/Mael/Documents/Github/ProjetPython/ressource/equipement.json")
+items = parse_json_equipement("ressource/equipement.json")
 
 for item in items:
 	print(item)

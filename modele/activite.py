@@ -31,7 +31,7 @@ class Activite:
 		self.comInsee = comInsee
 
 	def SQLcreate(self):
-		return "CREATE TABLE IF NOT EXISTS activite (equipementId INTEGER, comInsee INTEGER, actCode INTEGER)"
+		return "CREATE TABLE activite (equipementId INTEGER, comInsee INTEGER, actCode INTEGER)"
 	
 	def SQLinsert(self):
 		return "INSERT INTO activite VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.actCode)
@@ -50,3 +50,7 @@ def parse_json_activite(file):
 	return activite
 
 
+items = parse_json_activite("ressource/activite.json")
+
+for item in items:
+	print(item)

@@ -2,7 +2,7 @@ import cherrypy
 import json
 import service.database as db
  
-data = json.loads(open("c:/Users/Mael/Documents/Github/ProjetPython/ressource/installation.json").read())
+data = json.loads(open("ressource/installation.json").read())
  
 class WebManager(object):
 
@@ -21,8 +21,8 @@ class WebManager(object):
         """
         Exposes the service at localhost:8080/show_all/table
         """
-        database = db.Database("c:/Users/Mael/Documents/Github/ProjetPython/db/test.db")
-        database.selectAll(table)
+        database = db.Database("db/test.db")
+        return database.selectAll(table)
  
     @cherrypy.expose
     def show(self, id):

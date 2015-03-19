@@ -21,14 +21,13 @@ class Database:
 	def selectAll(self, name):
 		co = self.conn.cursor()
 		res = "<h1>"+name+"</h1>"
-		res += "<table>"
-		co.execute("SELECT COLUMN_NAME FROM ""INFORMATION_SCHEMA.COLUMNS"" WHERE TABLE_NAME = " + name)
-		for row in co.execute("SELECT * FROM " + name):
-			res += "<tr>"
+		res = res + "<table border=1>"
+		for row in co.execute("SELECT * FROM "+name):
+			res = res + "<tr>"
 			for el in row:
-				res += "<td>"+str(el)+"</td>"
-			res += "</tr>"
-		res += "</table>"
+				res = res + "<td>"+str(el)+"</td>"
+			res = res + "</tr>"
+		res = res +"</table>"
 		return res
 
 	def close(self):

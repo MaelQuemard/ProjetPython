@@ -24,7 +24,7 @@ class Installation:
 		self.insNumeroInstall = insNumeroInstall
 
 	def SQLcreate(self):
-		return "CREATE TABLE IF NOT EXISTS installation (comInsee INTEGER, insNumeroInstall INTEGER)"
+		return "CREATE TABLE installation (comInsee INTEGER, insNumeroInstall INTEGER)"
 	def SQLinsert(self):
 		return "INSERT INTO installation VALUES ({}, {})".format(self.comInsee, self.insNumeroInstall)
 
@@ -38,3 +38,8 @@ def parse_json_installation(file):
 		install.append(Installation(it["ComInsee"], it["InsNumeroInstall"]))
 
 	return install
+
+items = parse_json_installation("ressource/installation.json")
+
+for item in items:
+	print(item)
