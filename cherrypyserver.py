@@ -14,7 +14,11 @@ class WebManager(object):
         """
         Exposes the service at localhost:8080/
         """
-        return "There are {0} items".format(len(data))
+        html = '''<h1>Installations Sportives des Pays de la Loire</h1>\n
+        <a href="show_all/installation">Voir les installations</a><br/>\n
+        <a href="show_all/equipement">Voir les équipements</a><br/>\n
+        <a href="show_all/activite">Voir les activités</a>'''
+        return html
  
     @cherrypy.expose
     def show_all(self, table):

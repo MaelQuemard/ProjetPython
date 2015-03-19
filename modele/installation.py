@@ -4,29 +4,29 @@ import sqlite3
 
 class Installation:
 	"""docstring for installation"""
-	def __init__(self, comInsee, insNumeroInstall):
-		self.insNumeroInstall = insNumeroInstall
-		self.comInsee = comInsee
+	def __init__(self, ComInsee, InsNumeroInstall):
+		self.InsNumeroInstall = InsNumeroInstall
+		self.ComInsee = ComInsee
 
 	def __repr__(self):
-		return "{} - {}".format(self.comInsee, self.insNumeroInstall)
+		return "{} - {}".format(self.ComInsee, self.InsNumeroInstall)
 
-	def get_comInsee(self):
-		return str(self.comInsee)
+	def get_ComInsee(self):
+		return str(self.ComInsee)
 
-	def get_insNumeroInstall(self):
-		return str(self.insNumeroInstall)
+	def get_InsNumeroInstall(self):
+		return str(self.InsNumeroInstall)
 
-	def set_comInsee(self, comInsee):
-		self.comInsee = comInsee
+	def set_comInsee(self, ComInsee):
+		self.ComInsee = ComInsee
 
-	def set_insNumeroInstall(self, insNumeroInstall):
-		self.insNumeroInstall = insNumeroInstall
+	def set_insNumeroInstall(self, InsNumeroInstall):
+		self.InsNumeroInstall = InsNumeroInstall
 
 	def SQLcreate(self):
-		return "CREATE TABLE installation (comInsee INTEGER, insNumeroInstall INTEGER)"
+		return "CREATE TABLE installation (ComInsee INTEGER, InsNumeroInstall INTEGER)"
 	def SQLinsert(self):
-		return "INSERT INTO installation VALUES ({}, {})".format(self.comInsee, self.insNumeroInstall)
+		return "INSERT INTO installation VALUES ({}, {})".format(self.ComInsee, self.InsNumeroInstall)
 
 def parse_json_installation(file):
 	install = []
@@ -40,6 +40,6 @@ def parse_json_installation(file):
 	return install
 
 items = parse_json_installation("ressource/installation.json")
-
+'''
 for item in items:
-	print(item)
+	print(item)'''

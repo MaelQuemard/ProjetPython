@@ -4,37 +4,37 @@ import sqlite3
 
 class Activite:
 	"""docstring for Activite"""
-	def __init__(self, equipementId, comInsee, actCode):
-		self.equipementId = equipementId
-		self.comInsee = comInsee
-		self.actCode = actCode
+	def __init__(self, EquipementId, ComInsee, ActCode):
+		self.EquipementId = EquipementId
+		self.ComInsee = ComInsee
+		self.ActCode = ActCode
 
 	def __repr__(self):
-		return "{} - {} - {}".format(self.comInsee, self.actCode, self.equipementId)
+		return "{} - {} - {}".format(self.ComInsee, self.ActCode, self.EquipementId)
 
 	def get_equipementId(self):
-		return str(self.equipementId)
+		return str(self.EquipementId)
 
 	def get_actCode(self):
-		return str(self.actCode)
+		return str(self.ActCode)
 
 	def get_comInsee(self):
-		return str(self.comInsee)
+		return str(self.ComInsee)
 
-	def set_equipementId(self, equipementId):
-		self.equipementId = equipementId
+	def set_equipementId(self, EquipementId):
+		self.EquipementId = EquipementId
 
-	def set_actCode(self, actCode):
-		self.actCode = ac
+	def set_actCode(self, ActCode):
+		self.ActCode = ActCode
 
 	def set_comInsee(self, comInsee):
-		self.comInsee = comInsee
+		self.ComInsee = ComInsee
 
 	def SQLcreate(self):
-		return "CREATE TABLE activite (equipementId INTEGER, comInsee INTEGER, actCode INTEGER)"
+		return "CREATE TABLE activite (EquipementId INTEGER, ComInsee INTEGER, ActCode INTEGER)"
 	
 	def SQLinsert(self):
-		return "INSERT INTO activite VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.actCode)
+		return "INSERT INTO activite VALUES ({}, {}, {})".format(self.EquipementId, self.ComInsee, self.ActCode)
 
 
 def parse_json_activite(file):
@@ -51,6 +51,6 @@ def parse_json_activite(file):
 
 
 items = parse_json_activite("ressource/activite.json")
-
+'''
 for item in items:
-	print(item)
+	print(item)'''

@@ -49,6 +49,6 @@ def parse_json_equipement(file):
 	return equip
 
 items = parse_json_equipement("ressource/equipement.json")
-
+'''
 for item in items:
-	print(item)
+	print(item)'''

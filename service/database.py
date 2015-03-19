@@ -13,21 +13,22 @@ class Database:
 		co.execute(item.SQLcreate())
 		self.conn.commit()
 
-	def insert(self, it):
+	def insert(self, items):
 		co = self.conn.cursor()
-		for its in it:
-			co.execute(its.SQLinsert())
+		for item in items:
+			co.execute(item.SQLinsert())
 
 	def selectAll(self, name):
 		co = self.conn.cursor()
-		res = "<h1>"+name+"</h1>"
+		res = "<h1>"+ name +"</h1>"
 		res = res + "<table border=1>"
-		for row in co.execute("SELECT * FROM "+name):
+		for row in co.execute("SELECT * FROM " + name):
+			print(row)
 			res = res + "<tr>"
-			for el in row:
-				res = res + "<td>"+str(el)+"</td>"
+			for element in row:
+				res = res + "<td>"+str(element)+"</td>"
 			res = res + "</tr>"
-		res = res +"</table>"
+		res = res + "</table>"
 		return res
 
 	def close(self):
