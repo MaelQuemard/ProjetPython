@@ -30,6 +30,13 @@ class Equipement:
 	def set_equipementId(self, equipementId):
 		self.equipementId = equipementId
 
+	def SQLcreate(self):
+		return "CREATE TABLE IF NOT EXISTS equipement (equipementId INTEGER, comInsee INTEGER, insNumeroInstall INTEGER)"
+	
+	def SQLinsert(self):
+		return "INSERT INTO equipement VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.insNumeroInstall)
+
+
 def parse_json_equipement(file):
 	equip = []
 
@@ -37,11 +44,11 @@ def parse_json_equipement(file):
 	data = json.loads(json_data)
 
 	for it in data["data"]:
-		equip.append(Equipement(it["ComInsee"], it["InsNumeroInstall"], it["equipementId"]))
+		equip.append(Equipement(it["ComInsee"], it["InsNumeroInstall"], it["EquipementId"]))
 
 	return equip
 
-items = parse_json_equipement("../ressource/equipement.json")
+items = parse_json_equipement("c:/Users/Mael/Documents/Github/ProjetPython/ressource/equipement.json")
 
 for item in items:
 	print(item)

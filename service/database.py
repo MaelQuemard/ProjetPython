@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sqlite3
@@ -21,8 +20,16 @@ class Database:
 
 	def selectAll(self, name):
 		co = self.conn.cursor()
+		res = "<h1>"+name+"</h1>"
+		res += "<table>"
+		co.execute("SELECT COLUMN_NAME FROM ""INFORMATION_SCHEMA.COLUMNS"" WHERE TABLE_NAME = " + name)
 		for row in co.execute("SELECT * FROM " + name):
-			print(row)
+			res += "<tr>"
+			for el in row:
+				res += "<td>"+str(el)+"</td>"
+			res += "</tr>"
+		res += "</table>"
+		return res
 
 	def close(self):
 		self.conn.close()

@@ -1,1 +1,1 @@
-print("ok")
+import cherrypy

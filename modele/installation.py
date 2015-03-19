@@ -38,9 +38,3 @@ def parse_json_installation(file):
 		install.append(Installation(it["ComInsee"], it["InsNumeroInstall"]))
 
 	return install
-'''
-items = parse_json_installation("../ressource/installation.json")
-
-for item in items:
-	print(item)
-'''

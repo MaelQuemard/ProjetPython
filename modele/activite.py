@@ -48,9 +48,5 @@ def parse_json_activite(file):
 			activite.append(Activite(it["EquipementId"], it["ComInsee"], it["ActCode"]))
 
 	return activite
-'''
-items = parse_json_activite("../ressource/activite.json")
 
-for item in items:
-	print(item)
-'''
+
