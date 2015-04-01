@@ -3,33 +3,50 @@
 import cherrypy
 import json
 import service.database as db
- 
-data = json.loads(open("ressource/installation.json").read())
+from mako.template import Template
+from mako.lookup import TemplateLookup 
+lookup = TemplateLookup(directories=[""]) 
  
 class WebManager(object):
 
     """
     Exposes web services
-    """
+    """ 
     @cherrypy.expose
     def index(self):
         """
         Exposes the service at localhost:8080/
         """
-        html = '''<h1>Installations Sportives des Pays de la Loire</h1>\n
-        <a href="show_all/installation">Voir les installations</a><br/>\n
-        <a href="show_all/equipement">Voir les équipements</a><br/>\n
-        <a href="show_all/activite">Voir les activités</a>'''
-        return html
+        return Template(filename="index.html", lookup=lookup).render()
  
     @cherrypy.expose
     def show_all(self, table):
         """
         Exposes the service at localhost:8080/show_all/table
         """
+        view = Template(filename="template.html", lookup=lookup)
+
         database = db.Database("db/test.db")
-        return database.selectAll(table)
- 
+        results = database.selectAll(table)
+
+        return view.render( 
+            rows=results
+        )
+
+    @cherrypy.expose
+    def requestActivityCity(self, commune, activite):
+        """
+        Exposes the service at localhost:8080/requestActivityCity
+        """
+        view = Template(filename="template.html", lookup=lookup)
+
+        database = db.Database("db/test.db")
+        results = database.requestActivityCity(commune, activite)
+
+        return view.render( 
+            rows=results
+        )
+
     @cherrypy.expose
     def show(self, id):
         """

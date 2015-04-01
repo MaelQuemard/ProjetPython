@@ -12,24 +12,19 @@ acts = act.parse_json_activite("ressource/activite.json")
 
 database = db.Database("db/test.db")
 database.create("installation", inst[0])
-pbar = ProgressBar(widgets=['Parsing json and writing installations to database: ', Percentage(), ' ', ETA()])
+pbar = ProgressBar(widgets=['Insert into installations to database: ', Percentage(), ' ', ETA()])
 for elem in pbar(inst):
 	database.insertOne(elem)
-#database.selectAll("installation")
 
-pbar = ProgressBar(widgets=['Parsing json and writing equipement to database: ', Percentage(), ' ', ETA()])
+pbar = ProgressBar(widgets=['Insert into equipement to database: ', Percentage(), ' ', ETA()])
 database.create("equipement", equip[0])
 for elem in pbar(equip):
 	database.insertOne(elem)
-#database.insert(equip)
-#database.selectAll("equipement")
 
-pbar = ProgressBar(widgets=['Parsing json and writing activite to database: ', Percentage(), ' ', ETA()])
+pbar = ProgressBar(widgets=['Insert into activite to database: ', Percentage(), ' ', ETA()])
 database.create("activite", acts[0])
 for elem in pbar(acts):
 	database.insertOne(elem)
-#database.insert(acts)
-#database.selectAll("activite")
 
 database.commit()
 
