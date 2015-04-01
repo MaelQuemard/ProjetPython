@@ -3,27 +3,36 @@
 import modele.installation as ins
 import modele.equipement as eq
 import modele.activite as act
-
+from progressbar import *
 import service.database as db
 
 inst = ins.parse_json_installation("ressource/installation.json")
 equip = eq.parse_json_equipement("ressource/equipement.json")
 acts = act.parse_json_activite("ressource/activite.json")
 
-print("installation : \n")
 database = db.Database("db/test.db")
 database.create("installation", inst[0])
-database.insert(inst)
-database.selectAll("installation")
+pbar = ProgressBar(widgets=['Parsing json and writing installations to database: ', Percentage(), ' ', ETA()])
+for elem in pbar(inst):
+	database.insertOne(elem)
+#database.selectAll("installation")
 
-print("\n equipement : \n")
-database = db.Database("db/test.db")
+pbar = ProgressBar(widgets=['Parsing json and writing equipement to database: ', Percentage(), ' ', ETA()])
 database.create("equipement", equip[0])
-database.insert(equip)
-database.selectAll("equipement")
+for elem in pbar(equip):
+	database.insertOne(elem)
+#database.insert(equip)
+#database.selectAll("equipement")
 
-print("\n activite : \n")
-database = db.Database("db/test.db")
+pbar = ProgressBar(widgets=['Parsing json and writing activite to database: ', Percentage(), ' ', ETA()])
 database.create("activite", acts[0])
-database.insert(acts)
-database.selectAll("activite")
+for elem in pbar(acts):
+	database.insertOne(elem)
+#database.insert(acts)
+#database.selectAll("activite")
+
+database.commit()
+
+database.close()
+
+database

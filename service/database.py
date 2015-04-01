@@ -18,6 +18,10 @@ class Database:
 		for item in items:
 			co.execute(item.SQLinsert())
 
+	def insertOne(self, name):
+		co = self.conn.cursor()
+		co.execute(name.SQLinsert())
+
 	def selectAll(self, name):
 		co = self.conn.cursor()
 		res = "<h1>"+ name +"</h1>"
@@ -30,6 +34,9 @@ class Database:
 			res = res + "</tr>"
 		res = res + "</table>"
 		return res
+
+	def commit(self):
+		self.conn.commit()
 
 	def close(self):
 		self.conn.close()

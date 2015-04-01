@@ -4,13 +4,14 @@ import sqlite3
 
 class Equipement:
 	"""docstring for Equipement"""
-	def __init__(self, comInsee, insNumeroInstall, equipementId):
+	def __init__(self, comInsee, insNumeroInstall, equipementId, EquNom):
 		self.comInsee = comInsee
 		self.insNumeroInstall = insNumeroInstall
 		self.equipementId = equipementId
+		self.EquNom = EquNom
 
 	def __repr__(self):
-		return "{} - {} - {}".format(self.comInsee, self.insNumeroInstall, self.equipementId)
+		return "{} - {} - {} - {}".format(self.comInsee, self.insNumeroInstall, self.equipementId, self.EquNom)
 
 	def get_comInsee(self):
 		return str(self.comInsee)
@@ -21,20 +22,11 @@ class Equipement:
 	def get_equipementId(self):
 		return str(self.equipementId)
 
-	def set_comInsee(self, comInsee):
-		self.comInsee = comInsee
-
-	def set_insNumeroInstall(self, insNumeroInstall):
-		self.insNumeroInstall = insNumeroInstall
-
-	def set_equipementId(self, equipementId):
-		self.equipementId = equipementId
-
 	def SQLcreate(self):
-		return "CREATE TABLE equipement (equipementId integer, comInsee integer, insNumeroInstall integer)"
+		return "CREATE TABLE equipement (equipementId integer, comInsee integer, insNumeroInstall integer, EquNom VARCHAR)"
 	
 	def SQLinsert(self):
-		return "INSERT INTO equipement VALUES ({}, {}, {})".format(self.equipementId, self.comInsee, self.insNumeroInstall)
+		return "INSERT INTO equipement VALUES ({}, {}, {}, '{}')".format(self.equipementId, self.comInsee, self.insNumeroInstall, self.EquNom.replace("'", '"'))
 
 
 def parse_json_equipement(file):
@@ -44,7 +36,7 @@ def parse_json_equipement(file):
 	data = json.loads(json_data)
 
 	for it in data["data"]:
-		equip.append(Equipement(it["ComInsee"], it["InsNumeroInstall"], it["EquipementId"]))
+		equip.append(Equipement(it["ComInsee"], it["InsNumeroInstall"], it["EquipementId"], it["EquNom"]))
 
 	return equip
 
