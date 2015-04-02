@@ -3,7 +3,7 @@ import codecs
 import sqlite3
 
 class Installation:
-	"""docstring for installation"""
+	"""Class installation"""
 	def __init__(self, ComInsee, InsNumeroInstall, InsNoVoie, InsLibelleVoie, InsCodePostal, ComLib, Latitude, Longitude):
 		self.InsNumeroInstall = InsNumeroInstall
 		self.ComInsee = ComInsee
@@ -14,6 +14,7 @@ class Installation:
 		self.Latitude = Latitude
 		self.Longitude = Longitude
 
+	'''Equivalent of toString'''
 	def __repr__(self):
 		return "{} - {} - {} - {} - {} - {} - {} - {}".format(self.ComInsee, self.InsNumeroInstall, self.InsNoVoie, self.InsLibelleVoie, self.InsCodePostal, self.ComLib, self.Latitude, self.Longitude)
 
@@ -41,9 +42,11 @@ class Installation:
 	def get_Longitude():
 		return str(self.Longitude)
 
+	'''For create the table associate at installation'''
 	def SQLcreate(self):
 		return "CREATE TABLE installation (ComInsee INTEGER, InsNumeroInstall INTEGER, InsNoVoie VARCHAR, InsLibelleVoie VARCHAR, InsCodePostal INTEGER, ComLib VARCHAR, Latitude REAL, Longitude REAL)"
 	
+	'''For insert on the table installation'''
 	def SQLinsert(self):
 		return "INSERT INTO installation VALUES({}, {}, '{}', '{}' , {}, '{}', {} , {})".format(self.ComInsee, self.InsNumeroInstall, self.InsNoVoie.replace("'", '"'), self.InsLibelleVoie.replace("'",'"') , self.InsCodePostal, self.ComLib.replace("'",'"'), self.Latitude , self.Longitude)
 

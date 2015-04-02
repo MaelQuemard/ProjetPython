@@ -3,13 +3,14 @@ import json
 import sqlite3
 
 class Activite:
-	"""docstring for Activite"""
+	"""Class Activite"""
 	def __init__(self, EquipementId, ComInsee, ActCode, ActLib):
 		self.EquipementId = EquipementId
 		self.ComInsee = ComInsee
 		self.ActCode = ActCode
 		self.ActLib = ActLib
 
+	'''Equivalent of toString'''
 	def __repr__(self):
 		return "{} - {} - {} - {}".format(self.ComInsee, self.ActCode, self.EquipementId, self.ActLib)
 
@@ -25,13 +26,15 @@ class Activite:
 	def get_actLib(self):
 		return str(self.ActLib)
 
+	'''For create the table associate at activite'''
 	def SQLcreate(self):
 		return "CREATE TABLE activite (EquipementId INTEGER, ComInsee INTEGER, ActCode INTEGER, ActLib VARCHAR)"
 	
+	'''For insert on the table activite'''
 	def SQLinsert(self):
 		return "INSERT INTO activite VALUES ({}, {}, {}, '{}')".format(self.EquipementId, self.ComInsee, self.ActCode, self.ActLib.replace("'", '"'))
 
-
+'''For parse the JSON of activite'''
 def parse_json_activite(file):
 	activite = []
 
