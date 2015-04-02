@@ -19,15 +19,7 @@ class Database:
 
 	def selectAll(self, name):
 		co = self.conn.cursor()
-		res = "<h1>"+ name +"</h1>"
-		res = res + "<table border=1>"
 		return co.execute("SELECT * FROM " + name)
-		#	res = res + "<tr>"
-		#	for element in row:
-		#		res = res + "<td>"+str(element)+"</td>"
-		#	res = res + "</tr>"
-		#res = res + "</table>"
-		#return res
 
 	def commit(self):
 		self.conn.commit()
@@ -39,6 +31,10 @@ class Database:
 		co = self.conn.cursor()
 		return co.execute("SELECT DISTINCT a.ActLib, i.ComLib, e.EquNom, i.Latitude, i.Longitude FROM installation i, equipement e, activite a WHERE i.InsNumeroInstall=e.InsNumeroInstall and e.EquipementId = a.EquipementId and i.ComLib = \"" + commune + "\" and a.ActLib= \""+activite + "\"")
 
-	def requestCity(self, commune):
+	def requestActivity(self, commune):
 		co = self.conn.cursor()
 		return co.execute("SELECT DISTINCT a.ActLib FROM installation i, equipement e, activite a WHERE i.InsNumeroInstall=e.InsNumeroInstall and e.EquipementId = a.EquipementId and i.ComLib = \"" + commune +"\"")
+
+	def requestCity(self):
+		co = self.conn.cursor()
+		return co.execute("SELECT DISTINCT i.ComLib FROM installation i")

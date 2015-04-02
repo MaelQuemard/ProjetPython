@@ -1,0 +1,17 @@
+<%inherit file="base2.html"/>
+<select id="commune">
+% for row in rows:
+${makerow(row)}
+% endfor
+</select>
+ 
+<%def name="makerow(row)">
+% for name in row:
+<option>${name}</option>\
+% endfor
+</%def>
+ 
+<%block name="header">
+
+</%block> 
+

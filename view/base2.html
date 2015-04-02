@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE html>
+<html>
+<body>
+<div class="header">
+<%block name="header"/>
+</div>
+<h1> Consulter les activités disponibles selon une ville
+<form action="requestActivity">
+	${self.body()}
+	<input type="button" onclick="window.location.href='requestActivity/' + document.getElementById('commune').value;" value="Valider"/>
+</form>
+</body>
+</html> 

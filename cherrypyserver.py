@@ -17,17 +17,38 @@ class WebManager(object):
         """
         Exposes the service at localhost:8080/
         """
-        return Template(filename="index.html", lookup=lookup).render()
+        return Template(filename="view/index.html", lookup=lookup).render()
  
     @cherrypy.expose
     def show_all(self, table):
         """
         Exposes the service at localhost:8080/show_all/table
         """
-        view = Template(filename="template.html", lookup=lookup)
+        view = Template(filename="view/template.html", lookup=lookup)
 
         database = db.Database("db/test.db")
         results = database.selectAll(table)
+
+        return view.render( 
+            rows=results
+        )
+
+    @cherrypy.expose
+    def form_lieu(self):
+        """
+        Exposes the service at localhost:8080/form_lieu
+        """
+        return Template(filename="view/form_lieu.html", lookup=lookup).render()
+
+    @cherrypy.expose
+    def form_activity(self):
+        """
+        Exposes the service at localhost:8080/form_activity
+        """
+        view = Template(filename="view/template2.html", lookup=lookup)
+
+        database = db.Database("db/test.db")
+        results = database.requestCity()
 
         return view.render( 
             rows=results
@@ -38,7 +59,7 @@ class WebManager(object):
         """
         Exposes the service at localhost:8080/requestActivityCity
         """
-        view = Template(filename="template.html", lookup=lookup)
+        view = Template(filename="view/template.html", lookup=lookup)
 
         database = db.Database("db/test.db")
         results = database.requestActivityCity(commune, activite)
@@ -48,16 +69,17 @@ class WebManager(object):
         )
 
     @cherrypy.expose
-    def show(self, id):
+    def requestActivity(self, commune):
         """
-        Exposes the service at localhost:8080/show/[id]/
+        Exposes the service at localhost:8080/requestActivity
         """
-        try:
-            item = data[int(id)]
-        except (IndexError, IOError):
-            return "Invalid ID"
- 
-        return json.dumps(item)
- 
+        view = Template(filename="view/template.html", lookup=lookup)
+
+        database = db.Database("db/test.db")
+        results = database.requestActivity(commune)
+
+        return view.render( 
+            rows=results
+        ) 
  
 cherrypy.quickstart(WebManager())
